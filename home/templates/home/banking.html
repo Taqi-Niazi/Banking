@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Banking Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Bank Account</h1>
+    <h2>Current Balance: ${{ balance }}</h2>
+    <a href="{% url 'check_balance' %}">Check Balance</a><br>
+    <a href="{% url 'deposit' %}">Deposit Money</a><br>
+    <a href="{% url 'withdraw' %}">Withdraw Money</a><br>
+</body>
+</html>
