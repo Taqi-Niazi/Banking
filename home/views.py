@@ -35,17 +35,15 @@ def withdraw(request):
     if request.method == "POST":
         amount = float(request.POST.get("amount", 0))
 
-        # Get the first HomePage instance (change the query if needed)
-        homepage = HomePage.objects.first()  # ✅ Ensures you get at least one object
-
-        if not homepage:
-            return render(request, "home/withdraw.html", {"error": "No HomePage found."})
+        # Ensure there's at least one HomePage object
+        homepage, created = HomePage.objects.get_or_create(title="Bank Account", defaults={"balance": 0.0})
 
         if 0 < amount <= homepage.balance:
-            homepage.withdraw(amount)  # ✅ Works on a single object
+            homepage.withdraw(amount)
             return redirect("banking_home")
         else:
             return render(request, "home/withdraw.html", {"error": "Invalid amount or insufficient balance"})
 
     return render(request, "home/withdraw.html")
+
 
